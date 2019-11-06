@@ -1,8 +1,10 @@
-﻿using System;
+﻿using RandomizerLib.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
+using System.ServiceModel.Web;
 using System.Text;
 
 namespace RandomizerLib
@@ -11,8 +13,13 @@ namespace RandomizerLib
     [ServiceContract]
     public interface IService1
     {
+        [WebGet(ResponseFormat = WebMessageFormat.Json)]
+        User GetUser(string login);
+
         [OperationContract]
-        string GetData(int value);
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json)]
+        void RegisterUser(UserDto user);
 
         [OperationContract]
         CompositeType GetDataUsingDataContract(CompositeType composite);

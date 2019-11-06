@@ -55,17 +55,31 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builder\UserBuilder.cs" />
+    <Compile Include="Builder\UserDtoBuilder.cs" />
     <Compile Include="IService1.cs" />
     <Compile Include="Migrations\201911061025573_Types.cs" />
     <Compile Include="Migrations\201911061025573_Types.designer.cs">
       <DependentUpon>201911061025573_Types.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911061109488_Modify_User.cs" />
+    <Compile Include="Migrations\201911061109488_Modify_User.designer.cs">
+      <DependentUpon>201911061109488_Modify_User.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911061523411_Delete_Auto.cs" />
+    <Compile Include="Migrations\201911061523411_Delete_Auto.designer.cs">
+      <DependentUpon>201911061523411_Delete_Auto.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\RandomizerContext.cs" />
     <Compile Include="Model\Request.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="Populator\UserDtoToUserPopulator.cs" />
+    <Compile Include="Populator\UserToUserDtoPopulator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service1.cs" />
+    <Compile Include="Dao\UserDao.cs" />
+    <Compile Include="Dto\UserDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -74,6 +88,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201911061025573_Types.resx">
       <DependentUpon>201911061025573_Types.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911061109488_Modify_User.resx">
+      <DependentUpon>201911061109488_Modify_User.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911061523411_Delete_Auto.resx">
+      <DependentUpon>201911061523411_Delete_Auto.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
