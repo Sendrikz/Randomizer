@@ -1,0 +1,43 @@
+{
+	"info": {
+		"_postman_id": "5701f297-212a-4f90-a04e-0bab5321c50c",
+		"name": "Randomizer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get user by login",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check user credentials",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "Client sends user login and password. Server checks if such client exists and if password fits"
+			},
+			"response": []
+		}
+	]
+}
