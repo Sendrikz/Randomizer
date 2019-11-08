@@ -18,6 +18,8 @@ namespace RandomizerLib.Populator
                 .SetName(userDto.Name)
                 .SetPassword(userDto.Password)
                 .SetSurname(userDto.Surname)
+                .SetUpGuid()
+                .SetUpLastAccess()
                 .create();
         }
     }

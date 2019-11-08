@@ -46,12 +46,6 @@ namespace RandomizerLib.Builder
             return this;
         }
 
-        public UserDtoBuilder SetLastAccess(DateTime time)
-        {
-            user.LastAccess = time;
-            return this;
-        }
-
         public UserDto create()
         {
             return user;

@@ -1,8 +1,11 @@
-﻿using RandomizerLib.Model;
+﻿using RandomizerLib.Dto;
+using RandomizerLib.Exception;
+using RandomizerLib.Model;
 using RandomizerLib.Populator;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
@@ -10,55 +13,44 @@ using System.Text;
 
 namespace RandomizerLib
 {
-    // ПРИМЕЧАНИЕ. Команду "Переименовать" в меню "Рефакторинг" можно использовать для одновременного изменения имени класса "Service1" в коде и файле конфигурации.
     public class Service1 : IService1
     {
 
         UserDao userDao = new UserDao();
         UserDtoToUserPopulator userDtoToUser = new UserDtoToUserPopulator();
         UserToUserDtoPopulator userToUserDto = new UserToUserDtoPopulator();
+        UserCredentialsDtoToUserPopulator UserCredentialsDtoToUser = new UserCredentialsDtoToUserPopulator();
 
-        public User GetUser(string login)
+        public UserDto CheckCredentials(UserCredentialsDto user)
         {
-         /*   
-            User user = new User();
-            user.Id = Guid.NewGuid();
-            user.Name = "Olha";
-            user.Surname = "Yurieva";
-            user.Email = "yuryeva.olga@gmail.com";
-            user.Password = "pass";
-            user.Login = "sasha";
-            user.LastAccess = DateTime.Now;
+            User userToCheck = UserCredentialsDtoToUser.populate(user);
+            User resultedUser; 
+            try
+            {
+               resultedUser = userDao.GetLogined(userToCheck);
+            }
+            catch(System.Exception e)
+            {
+                throw new FaultException<Fault>(new Fault(e.Message));
+            }
 
-            RandomizerContext context = new RandomizerContext();
-            context.Users.Add(user);
-
-            context.SaveChanges();
-            */
-
-            return userDao.GetUserByLogin(login); //string.Format("You entered: {0}", value);
+            return userToUserDto.populate(resultedUser);
         }
 
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
+        public UserDto GetUser(string login)
         {
-            if (composite == null)
-            {
-                throw new ArgumentNullException("composite");
-            }
-            if (composite.BoolValue)
-            {
-                composite.StringValue += "Suffix";
-            }
-            return composite;
+            User findedUser = userDao.GetUserByLogin(login);
+            return userToUserDto.populate(findedUser);
         }
 
-        public void RegisterUser(UserDto user)
+
+        public HttpStatusCode RegisterUser(UserDto user)
         {
             User userToAdd = userDtoToUser.populate(user);
 
             userDao.CreateUser(userToAdd);
 
-            // return userToUserDto.populate(registrated);
+            return HttpStatusCode.Created;
         }
     }
 }

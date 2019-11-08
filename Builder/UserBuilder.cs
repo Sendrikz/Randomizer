@@ -15,8 +15,18 @@ namespace RandomizerLib.Builder
         public UserBuilder()
         {
             user = new User();
+        }
+
+        public UserBuilder SetUpGuid()
+        {
             user.Id = Guid.NewGuid();
+            return this;
+        }
+
+        public UserBuilder SetUpLastAccess()
+        {
             user.LastAccess = DateTime.Now;
+            return this;
         }
 
         public UserBuilder SetName(string name)

@@ -5,25 +5,15 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RandomizerLib
+namespace RandomizerLib.Dto
 {
     [DataContract]
-    public class UserDto
+    public class UserCredentialsDto
     {
-        [DataMember]
-        public string Name { get; set; }
-
-        [DataMember]
-        public string Surname { get; set; }
-
         [DataMember]
         public string Login { get; set; }
 
         [DataMember]
         public string Password { get; set; }
-
-        [DataMember]
-        public string Email { get; set; }
-        
     }
 }
