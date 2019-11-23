@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Builder\UserBuilder.cs" />
     <Compile Include="Builder\UserDtoBuilder.cs" />
+    <Compile Include="Dto\HistoryDto.cs" />
     <Compile Include="Dto\UserCredentialsDto.cs" />
     <Compile Include="Exception\NoSuchUserException.cs" />
     <Compile Include="IService1.cs" />

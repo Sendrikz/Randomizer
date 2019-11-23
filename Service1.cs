@@ -32,22 +32,6 @@ namespace RandomizerLib
             return userToUserDto.populate(resultedUser);
         }
 
-        public UserDto GetUser(string login)
-        {
-            User findedUser = null;
-
-            try
-            {
-                findedUser = userDao.GetUserByLogin(login);
-            }
-            catch (System.Exception e)
-            {
-                throw new FaultException<NoSuchUserException>(new NoSuchUserException(), e.Message);
-            }
-
-            return userToUserDto.populate(findedUser);
-        }
-
         public bool ExistUser(string login)
         {
             try
@@ -75,7 +59,7 @@ namespace RandomizerLib
             throw new NotImplementedException();
         }
 
-        public void SaveHistory(string login, int from, int to, int count)
+        public void SaveHistory(HistoryDto history)
         {
             throw new NotImplementedException();
         }

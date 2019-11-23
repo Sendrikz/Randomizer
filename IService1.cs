@@ -8,10 +8,6 @@ namespace RandomizerLib
     public interface IService1
     {
         [OperationContract]
-        [FaultContract(typeof(NoSuchUserException))]
-        UserDto GetUser(string login);
-
-        [OperationContract]
         bool ExistUser(string login);
 
         [OperationContract]
@@ -25,7 +21,7 @@ namespace RandomizerLib
         void UserHistory(string login);
 
         [OperationContract]
-        void SaveHistory(string login, int from, int to, int count);
+        void SaveHistory(HistoryDto history);
     }
   
 }
