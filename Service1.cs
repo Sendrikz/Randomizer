@@ -8,7 +8,6 @@ using System.Linq;
 using System.Net;
 using System.Runtime.Serialization;
 using System.ServiceModel;
-using System.ServiceModel.Web;
 using System.Text;
 
 namespace RandomizerLib
@@ -40,17 +39,18 @@ namespace RandomizerLib
         public UserDto GetUser(string login)
         {
             User findedUser = userDao.GetUserByLogin(login);
+
             return userToUserDto.populate(findedUser);
         }
 
 
-        public HttpStatusCode RegisterUser(UserDto user)
+        public bool RegisterUser(UserDto user)
         {
             User userToAdd = userDtoToUser.populate(user);
 
             userDao.CreateUser(userToAdd);
 
-            return HttpStatusCode.Created;
+            return true;
         }
     }
 }

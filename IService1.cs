@@ -7,7 +7,6 @@ using System.Linq;
 using System.Net;
 using System.Runtime.Serialization;
 using System.ServiceModel;
-using System.ServiceModel.Web;
 using System.Text;
 
 namespace RandomizerLib
@@ -15,16 +14,13 @@ namespace RandomizerLib
     [ServiceContract]
     public interface IService1
     {
-        [WebGet(ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
         UserDto GetUser(string login);
 
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json,
-            ResponseFormat = WebMessageFormat.Json)]
-        HttpStatusCode RegisterUser(UserDto user);
+        [OperationContract]
+        bool RegisterUser(UserDto user);
 
-        [WebInvoke(Method = "PUT", RequestFormat = WebMessageFormat.Json,
-            ResponseFormat = WebMessageFormat.Json)]
-        [FaultContract(typeof(Fault))]
+        [OperationContract]
         UserDto CheckCredentials(UserCredentialsDto user);
        
     }
