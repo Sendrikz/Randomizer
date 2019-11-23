@@ -12,12 +12,20 @@ namespace RandomizerLib
         UserDto GetUser(string login);
 
         [OperationContract]
-        bool RegisterUser(UserDto user);
+        bool ExistUser(string login);
+
+        [OperationContract]
+        void RegisterUser(UserDto user);
 
         [OperationContract]
         [FaultContract(typeof(NoSuchUserException))]
         UserDto CheckCredentials(UserCredentialsDto user);
-       
+
+        [OperationContract]
+        void UserHistory(string login);
+
+        [OperationContract]
+        void SaveHistory(string login, int from, int to, int count);
     }
   
 }

@@ -2,6 +2,7 @@
 using RandomizerLib.Exception;
 using RandomizerLib.Model;
 using RandomizerLib.Populator;
+using System;
 using System.ServiceModel;
 
 namespace RandomizerLib
@@ -47,14 +48,36 @@ namespace RandomizerLib
             return userToUserDto.populate(findedUser);
         }
 
+        public bool ExistUser(string login)
+        {
+            try
+            {
+                userDao.GetUserByLogin(login);
+            }
+            catch (System.Exception)
+            {
+                return false;
+            }
 
-        public bool RegisterUser(UserDto user)
+            return true;
+        }
+
+
+        public void RegisterUser(UserDto user)
         {
             User userToAdd = userDtoToUser.populate(user);
 
             userDao.CreateUser(userToAdd);
+        }
 
-            return true;
+        public void UserHistory(string login)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SaveHistory(string login, int from, int to, int count)
+        {
+            throw new NotImplementedException();
         }
     }
 }
