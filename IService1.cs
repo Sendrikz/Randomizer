@@ -10,7 +10,7 @@ namespace RandomizerLib
     public interface IService1
     {
         [OperationContract]
-        bool ExistUser(string login);
+        bool IsUserExist(string login);
 
         [OperationContract]
         void RegisterUser(UserDto user);
@@ -20,7 +20,7 @@ namespace RandomizerLib
         UserDto CheckCredentials(UserCredentialsDto user);
 
         [OperationContract]
-        ICollection<Request> UserHistory(string login);
+        ICollection<Request> GetUserHistoryBy(string login);
 
         [OperationContract]
         void SaveHistory(HistoryDto history);

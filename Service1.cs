@@ -37,7 +37,7 @@ namespace RandomizerLib
             return userToUserDto.populate(resultedUser);
         }
 
-        public bool ExistUser(string login)
+        public bool IsUserExist(string login)
         {
             try
             {
@@ -59,7 +59,7 @@ namespace RandomizerLib
             userDao.CreateUser(userToAdd);
         }
 
-        public ICollection<Request> UserHistory(string login)
+        public ICollection<Request> GetUserHistoryBy(string login)
         {
             return userDao.GetUserHistory(login);
         }
