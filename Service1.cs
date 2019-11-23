@@ -1,4 +1,5 @@
-﻿using RandomizerLib.Dto;
+﻿using RandomizerLib.Dao;
+using RandomizerLib.Dto;
 using RandomizerLib.Exception;
 using RandomizerLib.Model;
 using RandomizerLib.Populator;
@@ -12,7 +13,8 @@ namespace RandomizerLib
     public class Service1 : IService1
     {
 
-        UserDao userDao = new UserDao();
+        UserDao userDao = new EntityFrameworkUserDao();
+
         UserDtoToUserPopulator userDtoToUser = new UserDtoToUserPopulator();
         UserToUserDtoPopulator userToUserDto = new UserToUserDtoPopulator();
         UserCredentialsDtoToUserPopulator userCredentialsDtoToUser = new UserCredentialsDtoToUserPopulator();
@@ -60,8 +62,6 @@ namespace RandomizerLib
         public ICollection<Request> UserHistory(string login)
         {
             return userDao.GetUserHistory(login);
-
-            
         }
 
         public void SaveHistory(HistoryDto history)

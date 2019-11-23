@@ -1,4 +1,5 @@
-﻿using RandomizerLib.Model;
+﻿using RandomizerLib.Dao;
+using RandomizerLib.Model;
 using System;
 
 namespace RandomizerLib.Builder
@@ -6,12 +7,11 @@ namespace RandomizerLib.Builder
     public class RequestBuilder
     {
         private Request request;
-        private UserDao userDao;
+        private UserDao userDao = new EntityFrameworkUserDao();
 
         public RequestBuilder()
         {
             request = new Request();
-            userDao = new UserDao();
         }
 
         public RequestBuilder SetUpGuid()
