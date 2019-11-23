@@ -49,6 +49,7 @@
     <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builder\RequestBuilder.cs" />
     <Compile Include="Builder\UserBuilder.cs" />
     <Compile Include="Builder\UserDtoBuilder.cs" />
     <Compile Include="Dto\HistoryDto.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Model\RandomizerContext.cs" />
     <Compile Include="Model\Request.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="Populator\HistoryDtoToRequestPopulator.cs" />
     <Compile Include="Populator\UserCredentialsDtoToUserPopulator.cs" />
     <Compile Include="Populator\UserDtoToUserPopulator.cs" />
     <Compile Include="Populator\UserToUserDtoPopulator.cs" />

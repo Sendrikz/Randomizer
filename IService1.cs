@@ -1,5 +1,7 @@
 ﻿using RandomizerLib.Dto;
 using RandomizerLib.Exception;
+using RandomizerLib.Model;
+using System.Collections.Generic;
 using System.ServiceModel;
 
 namespace RandomizerLib
@@ -18,7 +20,7 @@ namespace RandomizerLib
         UserDto CheckCredentials(UserCredentialsDto user);
 
         [OperationContract]
-        void UserHistory(string login);
+        ICollection<Request> UserHistory(string login);
 
         [OperationContract]
         void SaveHistory(HistoryDto history);

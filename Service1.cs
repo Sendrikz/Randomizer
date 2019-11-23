@@ -3,6 +3,8 @@ using RandomizerLib.Exception;
 using RandomizerLib.Model;
 using RandomizerLib.Populator;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ServiceModel;
 
 namespace RandomizerLib
@@ -13,11 +15,12 @@ namespace RandomizerLib
         UserDao userDao = new UserDao();
         UserDtoToUserPopulator userDtoToUser = new UserDtoToUserPopulator();
         UserToUserDtoPopulator userToUserDto = new UserToUserDtoPopulator();
-        UserCredentialsDtoToUserPopulator UserCredentialsDtoToUser = new UserCredentialsDtoToUserPopulator();
+        UserCredentialsDtoToUserPopulator userCredentialsDtoToUser = new UserCredentialsDtoToUserPopulator();
+        HistoryDtoToRequestPopulator historyDtoToRequest = new HistoryDtoToRequestPopulator();
 
         public UserDto CheckCredentials(UserCredentialsDto user)
         {
-            User userToCheck = UserCredentialsDtoToUser.populate(user);
+            User userToCheck = userCredentialsDtoToUser.populate(user);
             User resultedUser; 
 
             try
@@ -54,14 +57,17 @@ namespace RandomizerLib
             userDao.CreateUser(userToAdd);
         }
 
-        public void UserHistory(string login)
+        public ICollection<Request> UserHistory(string login)
         {
-            throw new NotImplementedException();
+            return userDao.GetUserHistory(login);
+
+            
         }
 
         public void SaveHistory(HistoryDto history)
         {
-            throw new NotImplementedException();
+            Request request = historyDtoToRequest.populate(history);
+            userDao.SaveHistory(history.Login, request);
         }
     }
 }
