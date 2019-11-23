@@ -2,13 +2,7 @@
 using RandomizerLib.Exception;
 using RandomizerLib.Model;
 using RandomizerLib.Populator;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Runtime.Serialization;
 using System.ServiceModel;
-using System.Text;
 
 namespace RandomizerLib
 {
@@ -24,13 +18,14 @@ namespace RandomizerLib
         {
             User userToCheck = UserCredentialsDtoToUser.populate(user);
             User resultedUser; 
+
             try
             {
                resultedUser = userDao.GetLogined(userToCheck);
             }
             catch(System.Exception e)
             {
-                throw new FaultException<Fault>(new Fault(e.Message));
+                throw new FaultException<NoSuchUserException>(new NoSuchUserException(), e.Message);
             }
 
             return userToUserDto.populate(resultedUser);
@@ -38,7 +33,16 @@ namespace RandomizerLib
 
         public UserDto GetUser(string login)
         {
-            User findedUser = userDao.GetUserByLogin(login);
+            User findedUser = null;
+
+            try
+            {
+                findedUser = userDao.GetUserByLogin(login);
+            }
+            catch (System.Exception e)
+            {
+                throw new FaultException<NoSuchUserException>(new NoSuchUserException(), e.Message);
+            }
 
             return userToUserDto.populate(findedUser);
         }

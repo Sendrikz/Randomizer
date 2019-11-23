@@ -8,16 +8,20 @@ using System.Threading.Tasks;
 namespace RandomizerLib.Exception
 {
     [DataContract]
-    public class Fault
+    public class NoSuchUserException
     {
-        private string _message;
-
-        public Fault(string message)
-        {
-            _message = message;
-        }
 
         [DataMember]
-        public string Message { get { return _message; } set { _message = value; } }
+        private string Message;
+
+        public NoSuchUserException()
+        {
+        }
+
+        public NoSuchUserException(string message)
+        {
+            Message = message;
+        }
+
     }
 }

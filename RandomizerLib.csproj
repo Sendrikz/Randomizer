@@ -52,7 +52,7 @@
     <Compile Include="Builder\UserBuilder.cs" />
     <Compile Include="Builder\UserDtoBuilder.cs" />
     <Compile Include="Dto\UserCredentialsDto.cs" />
-    <Compile Include="Exception\Fault.cs" />
+    <Compile Include="Exception\NoSuchUserException.cs" />
     <Compile Include="IService1.cs" />
     <Compile Include="Migrations\201911061025573_Types.cs" />
     <Compile Include="Migrations\201911061025573_Types.designer.cs">

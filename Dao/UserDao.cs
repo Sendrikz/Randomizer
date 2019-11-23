@@ -15,7 +15,19 @@ namespace RandomizerLib
 
         public User GetUserByLogin(string _login)
         {
-            return context.Users.Where(s => s.Login == _login).FirstOrDefault<User>();
+            User user = null;
+
+            try
+            {
+
+                user = context.Users.Where(s => s.Login == _login).First<User>();
+
+            } catch(InvalidOperationException e)
+            {
+                throw new System.Exception("There is no user with such login", e);
+            } 
+
+            return user;
         }
 
         public User GetLogined(User user)
