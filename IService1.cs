@@ -20,7 +20,7 @@ namespace RandomizerLib
         UserDto CheckCredentials(UserCredentialsDto user);
 
         [OperationContract]
-        ICollection<Request> GetUserHistoryBy(string login);
+        ICollection<RequestDto> GetUserHistoryBy(string login);
 
         [OperationContract]
         void SaveHistory(HistoryDto history);

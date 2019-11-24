@@ -11,7 +11,7 @@ namespace RandomizerLib.Dao
 {
     public class EntityFrameworkUserDao : UserDao
     {
-        RandomizerContext context = new RandomizerContext();
+        private RandomizerContext context = new RandomizerContext();
 
         public User GetUserByLogin(string _login)
         {

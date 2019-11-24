@@ -13,12 +13,14 @@ namespace RandomizerLib
     public class Service1 : IService1
     {
 
-        UserDao userDao = new EntityFrameworkUserDao();
+        private UserDao userDao = new EntityFrameworkUserDao();
 
-        UserDtoToUserPopulator userDtoToUser = new UserDtoToUserPopulator();
-        UserToUserDtoPopulator userToUserDto = new UserToUserDtoPopulator();
-        UserCredentialsDtoToUserPopulator userCredentialsDtoToUser = new UserCredentialsDtoToUserPopulator();
-        HistoryDtoToRequestPopulator historyDtoToRequest = new HistoryDtoToRequestPopulator();
+        private UserDtoToUserPopulator userDtoToUser = new UserDtoToUserPopulator();
+        private UserToUserDtoPopulator userToUserDto = new UserToUserDtoPopulator();
+        private UserCredentialsDtoToUserPopulator userCredentialsDtoToUser = new UserCredentialsDtoToUserPopulator();
+        private HistoryDtoToRequestPopulator historyDtoToRequest = new HistoryDtoToRequestPopulator();
+        private RequestToRequestDtoPopulator requestToRequestDto = new RequestToRequestDtoPopulator();
+
 
         public UserDto CheckCredentials(UserCredentialsDto user)
         {
@@ -59,9 +61,15 @@ namespace RandomizerLib
             userDao.CreateUser(userToAdd);
         }
 
-        public ICollection<Request> GetUserHistoryBy(string login)
+        public ICollection<RequestDto> GetUserHistoryBy(string login)
         {
-            return userDao.GetUserHistory(login);
+            ICollection<Request> requests = userDao.GetUserHistory(login);
+            ICollection<RequestDto> dtoRequests = new Collection<RequestDto>();
+
+            foreach (var req in requests)
+                dtoRequests.Add(requestToRequestDto.populate(req));
+
+            return dtoRequests;
         }
 
         public void SaveHistory(HistoryDto history)
