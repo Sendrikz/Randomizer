@@ -24,7 +24,7 @@ namespace RandomizerLib
 
         public UserDto CheckCredentials(UserCredentialsDto user)
         {
-            User userToCheck = userCredentialsDtoToUser.populate(user);
+            User userToCheck = userCredentialsDtoToUser.Populate(user);
             User resultedUser; 
 
             try
@@ -36,7 +36,7 @@ namespace RandomizerLib
                 throw new FaultException<NoSuchUserException>(new NoSuchUserException(), e.Message);
             }
 
-            return userToUserDto.populate(resultedUser);
+            return userToUserDto.Populate(resultedUser);
         }
 
         public bool IsUserExist(string login)
@@ -56,7 +56,7 @@ namespace RandomizerLib
 
         public void RegisterUser(UserDto user)
         {
-            User userToAdd = userDtoToUser.populate(user);
+            User userToAdd = userDtoToUser.Populate(user);
 
             userDao.CreateUser(userToAdd);
         }
@@ -67,14 +67,14 @@ namespace RandomizerLib
             ICollection<RequestDto> dtoRequests = new Collection<RequestDto>();
 
             foreach (var req in requests)
-                dtoRequests.Add(requestToRequestDto.populate(req));
+                dtoRequests.Add(requestToRequestDto.Populate(req));
 
             return dtoRequests;
         }
 
         public void SaveHistory(HistoryDto history)
         {
-            Request request = historyDtoToRequest.populate(history);
+            Request request = historyDtoToRequest.Populate(history);
             userDao.SaveHistory(history.Login, request);
         }
     }

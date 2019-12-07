@@ -11,7 +11,7 @@ namespace RandomizerLib.Populator
 {
     public class HistoryDtoToRequestPopulator
     {
-        public Request populate(HistoryDto history)
+        public Request Populate(HistoryDto history)
         {
             return new RequestBuilder()
                 .Count(history.Count)
