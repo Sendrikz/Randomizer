@@ -1,6 +1,7 @@
 ﻿using NLog;
 using RandomizerLib.Builder;
 using RandomizerLib.Model;
+using RandomizerLib.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,6 +15,7 @@ namespace RandomizerLib.Dao
         private Logger logger = LogManager.GetCurrentClassLogger();
         
         private RandomizerContext context = new RandomizerContext();
+        private EncryptionUtil encryption = new EncryptionUtil();
 
         public User GetUserByLogin(string login)
         {
@@ -36,7 +38,7 @@ namespace RandomizerLib.Dao
 
         public User GetLogined(User user)
         {
-            string passwordToCheck = user.Password;
+            string passwordToCheck = encryption.Encrypt(user.Password);
             User findedUser = GetUserByLogin(user.Login);
 
             if (findedUser.Password.Equals(passwordToCheck))
@@ -57,6 +59,7 @@ namespace RandomizerLib.Dao
 
         public User CreateUser(User user)
         {
+            user.Password = encryption.Encrypt(user.Password);
             context.Users.Add(user);
             context.SaveChanges();
 

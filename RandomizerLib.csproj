@@ -92,6 +92,7 @@
     <Compile Include="Service1.cs" />
     <Compile Include="Dao\UserDao.cs" />
     <Compile Include="Dto\UserDto.cs" />
+    <Compile Include="Utilities\EncryptionUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

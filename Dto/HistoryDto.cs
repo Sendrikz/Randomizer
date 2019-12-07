@@ -17,10 +17,5 @@ namespace RandomizerLib.Dto
         [DataMember]
         public string Login { get; set; }
 
-        public override string ToString()
-        {
-            return "HistoryDto: From=" + From + ", To=" + To 
-                + ", Count=" + Count + ", Login=" + Login;
-        }
     }
 }
