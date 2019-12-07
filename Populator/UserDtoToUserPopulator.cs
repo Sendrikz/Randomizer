@@ -1,16 +1,11 @@
 ﻿using RandomizerLib.Builder;
 using RandomizerLib.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RandomizerLib.Populator
 {
     public class UserDtoToUserPopulator
     {
-        public User populate(UserDto userDto)
+        public User Populate(UserDto userDto)
         {
             return new UserBuilder()
                 .SetEmail(userDto.Email)

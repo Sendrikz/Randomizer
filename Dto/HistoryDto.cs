@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.Serialization;
 
 namespace RandomizerLib.Dto
 {
@@ -20,7 +15,12 @@ namespace RandomizerLib.Dto
         public int Count { get; set; }
 
         [DataMember]
-        public string Login { get; set; } 
+        public string Login { get; set; }
 
+        public override string ToString()
+        {
+            return "HistoryDto: From=" + From + ", To=" + To 
+                + ", Count=" + Count + ", Login=" + Login;
+        }
     }
 }
