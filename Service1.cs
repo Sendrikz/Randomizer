@@ -1,9 +1,9 @@
-﻿using RandomizerLib.Dao;
+﻿using NLog;
+using RandomizerLib.Dao;
 using RandomizerLib.Dto;
 using RandomizerLib.Exception;
 using RandomizerLib.Model;
 using RandomizerLib.Populator;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ServiceModel;
@@ -12,6 +12,8 @@ namespace RandomizerLib
 {
     public class Service1 : IService1
     {
+
+        private Logger logger = LogManager.GetCurrentClassLogger(); 
 
         private UserDao userDao = new EntityFrameworkUserDao();
 
@@ -24,6 +26,7 @@ namespace RandomizerLib
 
         public UserDto CheckCredentials(UserCredentialsDto user)
         {
+            logger.Info("Check credentials for user: " + user.Login);
             User userToCheck = userCredentialsDtoToUser.Populate(user);
             User resultedUser; 
 
@@ -33,6 +36,7 @@ namespace RandomizerLib
             }
             catch(System.Exception e)
             {
+                logger.Error(e.Message);
                 throw new FaultException<NoSuchUserException>(new NoSuchUserException(), e.Message);
             }
 
@@ -41,12 +45,14 @@ namespace RandomizerLib
 
         public bool IsUserExist(string login)
         {
+            logger.Info("Check if exit user with login: " + login);
             try
             {
                 userDao.GetUserByLogin(login);
             }
             catch (System.Exception)
             {
+                logger.Warn("No user with such login: " + login);
                 return false;
             }
 
@@ -56,6 +62,7 @@ namespace RandomizerLib
 
         public void RegisterUser(UserDto user)
         {
+            logger.Info("Register user with login: " + user.Login);
             User userToAdd = userDtoToUser.Populate(user);
 
             userDao.CreateUser(userToAdd);
@@ -63,6 +70,7 @@ namespace RandomizerLib
 
         public ICollection<RequestDto> GetUserHistoryBy(string login)
         {
+            logger.Info("Get history of user with login: " + login);
             ICollection<Request> requests = userDao.GetUserHistory(login);
             ICollection<RequestDto> dtoRequests = new Collection<RequestDto>();
 
@@ -74,7 +82,9 @@ namespace RandomizerLib
 
         public void SaveHistory(HistoryDto history)
         {
+            logger.Info("Save history of user with login: " + history.Login);
             Request request = historyDtoToRequest.Populate(history);
+
             userDao.SaveHistory(history.Login, request);
         }
     }

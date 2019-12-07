@@ -1,30 +1,34 @@
-﻿using RandomizerLib.Builder;
+﻿using NLog;
+using RandomizerLib.Builder;
 using RandomizerLib.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace RandomizerLib.Dao
 {
     public class EntityFrameworkUserDao : UserDao
     {
+        private Logger logger = LogManager.GetCurrentClassLogger();
+        
         private RandomizerContext context = new RandomizerContext();
 
-        public User GetUserByLogin(string _login)
+        public User GetUserByLogin(string login)
         {
             User user = null;
 
             try
             {
-                user = context.Users.Where(s => s.Login == _login).First<User>();
+                user = context.Users.Where(s => s.Login == login).First<User>();
 
             }
             catch (InvalidOperationException e)
             {
-                throw new System.Exception("There is no user with such login", e);
+                string exceptionMessage = "There is no user with such login";
+                logger.Error(exceptionMessage + login);
+                throw new System.Exception(exceptionMessage, e);
             }
 
             return user;
@@ -41,6 +45,7 @@ namespace RandomizerLib.Dao
                 return findedUser;
             }
 
+            logger.Error("Password does not match for user: " + user);
             throw new System.Exception("Invalid password");
         }
 
