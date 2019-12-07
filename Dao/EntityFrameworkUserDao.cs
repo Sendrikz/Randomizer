@@ -47,7 +47,7 @@ namespace RandomizerLib.Dao
                 return findedUser;
             }
 
-            logger.Error("Password does not match for user: " + user);
+            logger.Error("Password does not match for user with login: " + user.Login);
             throw new System.Exception("Invalid password");
         }
 
